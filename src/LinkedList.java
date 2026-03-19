@@ -1,3 +1,6 @@
+import java.util.Deque;
+import java.util.ArrayDeque;
+
 public class LinkedList<T> {
     // instance variables
     private Node head;
@@ -46,9 +49,27 @@ public class LinkedList<T> {
 
     public void reverse(){
         // Your code goes here
+        if (head == null || head.next == null) {
+            return;
+        }
 
+        Node current = head;
+        Deque<Node> stack = new ArrayDeque<>();
 
+        while (current != null) {
+            stack.push(current);
+            current = current.next;
+        }
 
+        head = stack.pop();
+        current = head;
+
+        while (!stack.isEmpty()) {
+            current.next = stack.pop();
+            current = current.next;
+        }
+
+        current.next = null;
     }
 
 
